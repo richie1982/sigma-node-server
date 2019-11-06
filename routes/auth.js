@@ -59,7 +59,7 @@ router.post('/products', (req, res) => {
 })
 
 router.delete('/delete', (req, res) => {
-
+    res.send("deleted")
 })
 
 module.exports = router
