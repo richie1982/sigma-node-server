@@ -2,30 +2,29 @@ const express = require("express")
 const app = express()
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
-const port = 3001
-const api = require('./services/api')
+const cors = require('cors')
 const authRoute = require('./routes/auth')
+const dataRoute = require('./routes/data')
 
+
+//Middleware
 dotenv.config()
-
 app.use(express.json())
+app.use(cors())
+
+const port = process.env.PORT || 3030
 
 mongoose.connect(process.env.DB_CONNECT, 
     {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
     },
     () => {
     console.log("DB Connected...")
 })
 
-// app.get('/', (req, res) => {
-//     res.send("Sigma Client")
-// })
-
 app.use('/', authRoute)
-
-// api.getData()
+app.use('/', dataRoute)
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`)
