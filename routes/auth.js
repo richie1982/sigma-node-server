@@ -31,7 +31,9 @@ router.get('/validate', async (req, res) => {
     res.header("authorisation", token).json({
         token: token, 
         firstName: user.firstName, 
-        email: user.email})
+        email: user.email,
+        id: user._id
+    })
 })
 
 router.post('/users', async (req, res) => {
@@ -78,13 +80,15 @@ router.post('/log_in', async (req, res) => {
     res.header("authorisation", token).json({
         token: token, 
         firstName: user.firstName, 
-        email: user.email})
+        email: user.email,
+        id: user._id
+    })
 })
 
 router.post('/products', async (req, res) => {
-    const id = await jwt.decode(req.headers.authorisation)
+    const id = jwt.decode(req.headers.authorisation)
     if (!id) return res.status(400).send({error: "Id invalid"})
-    // console.log(id)
+    
     const user = await User.findById(id)
     if (!user) return res.status(400).json({error: "User not found"})
 
@@ -108,7 +112,7 @@ router.get('/products', async (req, res) => {
 })
 
 router.delete('/delete', async (req, res) => {
-    const product = await Product.findByIdAndDelete(req.body._id)
+    const product = await Product.findByIdAndDelete(req.body.id)
     if (!product) return res.status(400).json({error: "Product not found"})
     res.send(product)
 })
