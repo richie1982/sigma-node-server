@@ -98,6 +98,9 @@ router.post('/products', async (req, res) => {
         user: user._id
     })
 
+    const duplicate = await Product.findOne({ ticker: req.body.ticker, user: user._id })
+    if (duplicate) return res.status(400).send({ error: "Product already in Inventory"})
+
     const savedProduct = await product.save()
         .catch(error => res.status(400).send({error: error}))
     

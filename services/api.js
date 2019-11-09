@@ -11,10 +11,10 @@ const companiesUrl = baseUrl + "/companies"
 const securitiesUrl = baseUrl + "/securities"
 const forexPairsUrl = baseUrl + "/forex/pairs"
 const forexUrl = baseUrl + "/forex/prices"
-const newsUrl = "https://api-v2.intrinio.com/companies/news?page_size=10&"
+const newsUrl = "https://api-v2.intrinio.com/companies/news?page_size=20&"
 // const newsUrl = "news"
 
-https://api-v2.intrinio.com/securities/AAPL/prices/intraday
+// "https://api-v2.intrinio.com/securities/AAPL/prices/intraday"
 
 
 
