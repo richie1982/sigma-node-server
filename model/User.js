@@ -9,6 +9,9 @@ const productSchema = new Schema({
     name: {
         type: String
     },
+    type: {
+        type: String
+    },
     user: {
         type: Schema.Types.ObjectId, 
         ref: 'User'
